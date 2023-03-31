@@ -8,16 +8,15 @@ export class ProductRepository {
     }
 
     async findById(id) {
-        // Or throw and error right here.
         return await productModel.findByPk(id);
     }
 
     async update(id, payload) {
-        var product = await productModel.findOne(id);
+        var product = await productModel.findByPk(id);
         if (product) {
             await product.update(payload);
 
-            return await productModel.findOne(id);
+            return await productModel.findByPk(id);
         }
 
         return null;
