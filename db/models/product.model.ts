@@ -1,19 +1,23 @@
 import {Sequelize, DataTypes} from "sequelize";
 
-const sequelize = new Sequelize('sqlite::memory:');
+export class ProductModel {
+    init(sequelize) {
+        var model = sequelize.define('Product', {
+            // Model attributes are defined here
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
+        }, {
+            freezeTableName: true,
+            tableName: 'product'
+        });
 
-const Product = sequelize.define('Product', {
-    // Model attributes are defined here
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
+        return model;
     }
-}, {
-    // Other model options go here
-});
-export default Product
+}

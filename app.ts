@@ -1,9 +1,8 @@
 // Import dot env config.
-// @ts-ignore-start
 import * as dotenv from "dotenv";
 dotenv.config();
 // Import express and cors library.
-import express,{ErrorRequestHandler} from 'express';
+import express from 'express';
 import cors from 'cors';
 
 // Import product routes.

@@ -1,20 +1,14 @@
-import  dbConfig from "./config/db.config";
+import dbConfig from "./config/db.config";
 import {Sequelize} from "sequelize";
-import ProductModel from "./models/product.model"
-const dbDialect = "mysql";
+import {ProductModel} from "./models/product.model"
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
-    dialect: dbDialect,
-    pool: {
-        max: dbConfig.pool.max,
-        min: dbConfig.pool.min,
-        acquire: dbConfig.pool.acquire,
-        idle: dbConfig.pool.idle
-    }
+    dialect: 'mysql'
 });
+const productModel = (new ProductModel()).init(sequelize);
 
 export default {
-    Sequelize : sequelize,
-    productModel : ProductModel
+    Sequelize: sequelize,
+    productModel: productModel
 };
