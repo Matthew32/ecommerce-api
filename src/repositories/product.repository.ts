@@ -9,7 +9,7 @@ export class ProductRepository {
 
     async findById(id) {
         // Or throw and error right here.
-        return await productModel.findOne(id);
+        return await productModel.findByPk(id);
     }
 
     async update(id, payload) {

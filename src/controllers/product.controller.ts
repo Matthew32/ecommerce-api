@@ -12,6 +12,15 @@ export class ProductController {
         }
     }
 
+    async findOne(req, res, next) {
+        try {
+            res.json(await productRepository.findById(req.params.id));
+        } catch (err) {
+            console.error(`Error while deleting programming language`, err.message);
+            next(err);
+        }
+    }
+
     async create(req, res, next) {
         try {
             res.json(await productRepository.create(req.body));

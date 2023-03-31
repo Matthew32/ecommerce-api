@@ -7,6 +7,8 @@ const productController = new ProductController();
 /* GET programming languages. */
 router.get('/', productController.get);
 
+router.get('/:id', productController.findOne);
+
 /* POST programming language */
 router.post('/', productController.create);
 
