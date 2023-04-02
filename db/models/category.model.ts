@@ -1,11 +1,11 @@
 import {Sequelize, DataTypes} from "sequelize";
 import {Model} from "./abstracts/model";
 
-export class ProductModel extends Model {
-    init(sequelize, relations = null) {
+export class CategoryModel extends Model {
+    init(sequelize, relations) {
         return this.instanceModel(
             sequelize,
-            'Product',
+            'Category',
             {
                 // Model attributes are defined here
                 id: {
@@ -17,21 +17,13 @@ export class ProductModel extends Model {
                     type: DataTypes.STRING,
                     allowNull: false
                 },
-                rating: {
-                    type: DataTypes.INTEGER
-                },
-                img_url: {
+                identifier: {
                     type: DataTypes.STRING,
-                    allowNull: false
-                },
-                price: {
-                    type: DataTypes.DOUBLE,
                     allowNull: false
                 }
             },
-            'product',
+            'category',
             relations
-        )
+        );
     }
-
 }

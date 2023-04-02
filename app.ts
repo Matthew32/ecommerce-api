@@ -7,6 +7,7 @@ import cors from 'cors';
 
 // Import product routes.
 import productRoute from "./src/routes/product.route";
+import categoryRoute from "./src/routes/category.route";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -18,6 +19,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/product', productRoute);
+
+app.use('/category', categoryRoute);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

@@ -1,13 +1,14 @@
 import {ProductRepository} from "../repositories/product.repository";
+import {BaseController} from "./contracts/baseController";
 
 const productRepository = new ProductRepository();
 
-export class ProductController {
+export class ProductController implements BaseController {
     async get(req, res, next) {
         try {
             res.json(await productRepository.getAll());
         } catch (err) {
-            console.error(`Error while creating programming language`, err.message);
+            console.error(err.message);
             next(err);
         }
     }
