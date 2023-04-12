@@ -1,7 +1,7 @@
 import {Sequelize, DataTypes} from "sequelize";
 import {Model} from "./abstracts/model";
 
-export class ProductModel extends Model {
+export class UserModel extends Model {
     init(sequelize, relations = null) {
         return this.instanceModel(
             sequelize,
