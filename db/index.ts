@@ -3,7 +3,6 @@ import {Sequelize} from "sequelize";
 import {ProductModel} from "./models/product.model"
 import {CategoryModel} from "./models/category.model"
 import {UserModel} from "./models/user.model"
-
 import {Model} from "./models/abstracts/model";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {

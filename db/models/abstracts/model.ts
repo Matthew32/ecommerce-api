@@ -5,21 +5,22 @@ export abstract class Model {
         return model;
     }
 
-    private define(sequelize, modelName, modelDeclaration, tableName) {
+    private define(sequelize, modelName, modelDeclaration, tableName, hooks = null, instanceMethods = null) {
         return sequelize.define(
             modelName,
             modelDeclaration,
             {
                 freezeTableName: true,
-                tableName: tableName
-            }
-        );
+                tableName: tableName,
+                hooks: hooks,
+                instanceMethods: instanceMethods
+            });
     }
 
-    instanceModel(sequilize, modelName, modelDeclaration, tableName, relations = null) {
+    instanceModel(sequilize, modelName, modelDeclaration, tableName, relations = null, hooks = null, instanceMethods = null) {
         var self = this;
 
-        let model = this.define(sequilize, modelName, modelDeclaration, tableName);
+        let model = this.define(sequilize, modelName, modelDeclaration, tableName, hooks, instanceMethods);
         if (relations && relations.belongsToMany && relations.belongsToMany.length > 0) {
             model = Model.setUpRelations(model, relations.belongsToMany);
         }

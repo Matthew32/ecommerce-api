@@ -1,9 +1,12 @@
 import {Sequelize, DataTypes} from "sequelize";
 import {Model} from "./abstracts/model";
+import bcrypt from "bcrypt";
+
+const passwordSalt = parseInt(process.env.PASSWORD_SALT)
 
 export class UserModel extends Model {
     init(sequelize, relations = null) {
-        return this.instanceModel(
+        var schema = this.instanceModel(
             sequelize,
             'User',
             {
@@ -32,8 +35,31 @@ export class UserModel extends Model {
                 }
             },
             'user',
-            relations
-        )
+            relations,
+            {
+                beforeCreate: async (user) => {
+                    if (user.password) {
+                        const salt = await bcrypt.genSaltSync(passwordSalt, 'a');
+                        user.password = bcrypt.hashSync(user.password, salt);
+                    }
+                },
+                beforeUpdate: async (user) => {
+                    if (user.password) {
+                        const salt = await bcrypt.genSaltSync(passwordSalt, 'a');
+                        user.password = bcrypt.hashSync(user.password, salt);
+                    }
+                }
+            },
+            {
+                validPassword: (password, payloadPassword) => {
+                    return bcrypt.compareSync(password, payloadPassword);
+                }
+            }
+        );
+        schema.prototype.validPassword = async (password, hash) => {
+            return await bcrypt.compareSync(password, hash);
+        }
+        return schema;
     }
 
 }
