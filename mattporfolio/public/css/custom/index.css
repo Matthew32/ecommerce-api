@@ -1,0 +1,22 @@
+
+#snowCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+
+    min-height: 38rem;
+     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    z-index: 1;
+    opacity: 0.5;
+}
+@media (max-width: 920px) {
+    #snowCanvas  {
+        min-height: 38rem;
+        max-height: 38rem;
+    }
+}
